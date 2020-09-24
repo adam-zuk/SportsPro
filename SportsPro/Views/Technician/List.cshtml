@@ -1,0 +1,43 @@
+﻿@model List<Technician>
+
+@{
+    ViewData["Title"] = "Technician Manager";
+}
+<h1>Technician Manager</h1>
+
+
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var technician in Model)
+        {
+            <tr>
+                <td>@technician.Name</td>
+                <td>@technician.Email</td>
+                <td>@technician.Phone</td>
+
+                <td>
+                    <a asp-controller="Technician" asp-action="Edit"
+                       asp-route-id="@technician.TechnicianID">Edit</a>
+                </td>
+                <td>
+                    <a asp-controller="Technician" asp-action="Delete"
+                       asp-route-id="@technician.TechnicianID">Delete</a>
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>
+<a class="btn btn-success" asp-controller="Technician" asp-action="Add">Add New Technician</a>

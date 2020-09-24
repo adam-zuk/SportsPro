@@ -1,0 +1,74 @@
+﻿@model IncidentAddEditViewModel
+
+@{
+    string title = ViewBag.Action + " Incident";
+    ViewData["Title"] = title;
+}
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<h1>@title</h1>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="@Model.ActiveIncident.Customer.CustomerID">Customer</label>
+        <select asp-for="@Model.ActiveIncident.Customer.CustomerID" asp-items="@(new SelectList(Model.Customers, "CustomerID", "FullName", (Model.ActiveIncident.Customer != null ? Model.ActiveIncident.Customer.CustomerID : 0)))" class="form-control">
+            <option value=""></option> @*might need to change this to match add/edit functions...*@
+            @*@foreach (Customer c in ViewBag.Customers)
+                {
+                    <option value="@c.CustomerID">@c.FullName</option>
+                }*@
+
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="@Model.ActiveIncident.Product.ProductID">Product</label>
+        <select asp-for="@Model.ActiveIncident.Product.ProductID" asp-items="@(new SelectList(Model.Products, "ProductID", "Name", (Model.ActiveIncident.Product != null ? Model.ActiveIncident.Product.ProductID : 0)))" class="form-control">
+            <option value=""></option>
+            @*@foreach (Product p in ViewBag.Products)
+                {
+                    <option value="@p.ProductID">@p.Name</option>
+                }*@
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="@Model.ActiveIncident.Title">Title</label>
+        <input asp-for="@Model.ActiveIncident.Title" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.ActiveIncident.Description">Description</label>
+        <textarea asp-for="@Model.ActiveIncident.Description" class="form-control" rows="5"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.ActiveIncident.Technician.TechnicianID"></label>
+        <select asp-for="@Model.ActiveIncident.Technician.TechnicianID" asp-items="@(new SelectList(Model.Technicians, "TechnicianID", "Name", (Model.ActiveIncident.Technician != null ? Model.ActiveIncident.Technician.TechnicianID : 0)))" class="form-control">
+            <option value="">Assign a technician</option>
+            @*@foreach (Technician t in ViewBag.Technicians)
+                {
+                    <option value="@t.TechnicianID">@t.Name</option>
+                }*@
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.ActiveIncident.DateOpened">Date Opened</label>
+        <input asp-for="@Model.ActiveIncident.DateOpened" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.ActiveIncident.DateClosed">Date closed</label>
+        <input asp-for="@Model.ActiveIncident.DateClosed" class="form-control">
+    </div>
+    <input type="hidden" asp-for="@Model.ActiveIncident.IncidentID" />
+
+    <button type="submit" class= btn btn-success>Save</button>
+    <div>
+        <a asp-controller="Incident" asp-action="List" class="btn btn-info">Cancel</a>
+    </div>
+
+</form>
+
+

@@ -1,0 +1,59 @@
+﻿@model IncidentAddEditViewModel
+@{
+    string title = "Edit Technician";
+    ViewData["Title"] = title;
+}
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<h1>@title</h1>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <div class="col">Technician Name:</div>
+        <div class="col">@Model.ActiveIncident.Technician.Name</div>
+        <input type="hidden" asp-for="@Model.ActiveIncident.TechnicianID" />  
+    </div>
+
+    <div class="form-group">
+        <div class="col">Customer Name:</div>
+        <div class="col">@Model.ActiveIncident.Customer.FullName</div>
+        <input type="hidden" asp-for="@Model.ActiveIncident.CustomerID" />
+    </div>
+
+    <div class="form-group">
+        <div class="col">Product:</div>
+        <div class="col">@Model.ActiveIncident.Product.Name</div>
+        <input type="hidden" asp-for="@Model.ActiveIncident.ProductID" />
+    </div>
+
+    <div class="form-group">
+        <div class="col">Title:</div>
+        <div class="col">@Model.ActiveIncident.Title</div>
+        <input type="hidden" asp-for="@Model.ActiveIncident.Title" />
+    </div>
+
+    <div class="form-group">
+        <div class="col">Date Opened:</div>
+        <div class="col">@Model.ActiveIncident.DateOpened</div>
+        <input type="hidden" asp-for="@Model.ActiveIncident.DateOpened" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.ActiveIncident.Description">Description</label>
+        <textarea asp-for="@Model.ActiveIncident.Description" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.ActiveIncident.DateClosed">DateClosed</label>
+        <input asp-for="@Model.ActiveIncident.DateClosed" class="form-control">
+    </div>
+
+    <input type="hidden" asp-for="@Model.ActiveIncident.IncidentID" />
+
+    <button type="submit" class="btn btn-success">Save</button>
+
+    <a asp-controller="TechIncident" asp-action="List" class="btn btn-success">Cancel</a>
+ 
+</form>
